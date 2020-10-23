@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Map as Leaflet, TileLayer } from 'react-leaflet'
 import { Circle, Popup } from 'react-leaflet'
 import numeral from 'numeral'
 import './Map.css'
 
 const Map = ({ countries, casesType, center, zoom }) => {
+  const [mapCenter, setMapCenter] = useState(center)
+
+  useEffect(() => {
+    setMapCenter(center)
+  }, [center])
+
   return (
     <div className='map'>
-      <Leaflet center={center} zoom={zoom}>
+      <Leaflet center={mapCenter} zoom={zoom}>
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
         {showDataOnMap(countries, casesType)}
       </Leaflet>
