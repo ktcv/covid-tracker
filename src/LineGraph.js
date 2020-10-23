@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import numeral from 'numeral'
+import './LineGraph.css'
 
 const buildChartData = (data, casesType = 'cases') => {
   let chartData = []
@@ -22,11 +23,9 @@ const LineGraph = ({ casesType }) => {
   const [data, setData] = useState({})
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
-        .then((response) => {
-          return response.json()
-        })
+    const fetchData = () => {
+      fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
+        .then((response) => response.json())
         .then((data) => {
           let chartData = buildChartData(data, casesType)
           setData(chartData)
@@ -73,7 +72,7 @@ const options = {
     mode: 'index',
     intersect: false,
     callbacks: {
-      label: function (tooltipItem) {
+      label: (tooltipItem) => {
         return numeral(tooltipItem.value).format('+0,0')
       },
     },
@@ -97,7 +96,7 @@ const options = {
           display: false,
         },
         ticks: {
-          callback: function (value) {
+          callback: (value) => {
             return numeral(value).format('0a')
           },
         },

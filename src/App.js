@@ -13,6 +13,7 @@ import Table from './Table'
 import LineGraph from './LineGraph'
 
 import './App.css'
+import 'leaflet/dist/leaflet.css'
 import { sortData } from './utils'
 
 const App = () => {
@@ -20,6 +21,9 @@ const App = () => {
   const [country, setCountry] = useState('worldwide')
   const [countryInfo, setCountryInfo] = useState({})
   const [tableData, setTableData] = useState([])
+  const [mapCenter, setMapCenter] = useState({ lat: 16.5388, lng: 10.0418 })
+  const [mapZoom, setMapZoom] = useState(2)
+  const [mapCountries, setMapCountries] = useState([])
 
   useEffect(() => {
     const getCountries = () => {
@@ -39,6 +43,7 @@ const App = () => {
 
           const sortedData = sortData(data)
           setTableData(sortedData)
+          setMapCountries(data)
           setCountries(countries)
         })
     }
@@ -48,7 +53,6 @@ const App = () => {
 
   const onCountryChange = (event) => {
     const countryCode = event.target.value
-    setCountry(countryCode)
 
     const url =
       countryCode === 'worldwide'
@@ -57,7 +61,12 @@ const App = () => {
 
     fetch(url)
       .then((response) => response.json())
-      .then((data) => setCountryInfo(data))
+      .then((data) => {
+        setCountry(countryCode)
+        setCountryInfo(data)
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+        setMapZoom(4)
+      })
   }
 
   return (
@@ -98,7 +107,7 @@ const App = () => {
             total={countryInfo.deaths}
           />
         </div>
-        <Map />
+        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
 
       <Card className='app__right'>
