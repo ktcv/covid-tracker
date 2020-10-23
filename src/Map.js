@@ -54,7 +54,7 @@ export const showDataOnMap = (data, casesType = 'cases') =>
 
 const casesTypeColors = {
   cases: {
-    hex: '#CC1034',
+    hex: '#cc1034',
     multiplier: 800,
   },
   recovered: {

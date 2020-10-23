@@ -1,5 +1,5 @@
 {
-  "name": "covid-heatmap",
+  "name": "live-covid-heatmap",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

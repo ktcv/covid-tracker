@@ -1,5 +1,6 @@
 .infoBox {
   flex: 1;
+  padding: 0 12px;
 }
 
 .infoBox:not(:last-child) {
@@ -14,4 +15,8 @@
   display: flex;
   justify-content: space-between;
   padding-top: 12px;
+}
+
+.infoBox__span {
+  color: #cc1034;
 }
