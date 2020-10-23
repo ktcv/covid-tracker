@@ -3,12 +3,12 @@ import './Table.css'
 
 const Table = ({ countries }) => {
   return (
-    <div className='container'>
+    <div className='table-container'>
       <table className='table'>
         <thead>
           <tr id='title-row'>
             <th>
-              <h3 className='title'>Live Cases by Country</h3>
+              <h3 className='title'>Cases by Country</h3>
             </th>
           </tr>
         </thead>

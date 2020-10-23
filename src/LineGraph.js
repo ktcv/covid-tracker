@@ -37,8 +37,8 @@ const LineGraph = ({ casesType }) => {
 
   return (
     <div>
-      <h3>Worldwide new cases</h3>
-      <div>
+      <h3 className='chart-title'>Worldwide Daily Cases</h3>
+      <div className='chart-container'>
         {data?.length > 0 && (
           <Line
             data={{

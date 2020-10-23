@@ -1,19 +1,20 @@
 import React from 'react'
-import { Card, CardContent, Typography } from '@material-ui/core'
+import { Card, CardContent } from '@material-ui/core'
+import './InfoBox.css'
 
 const InfoBox = ({ title, cases, total }) => {
   return (
-    <Card>
+    <Card className='infoBox'>
       <CardContent>
-        <Typography className='infoBox__title' color='textPrimary'>
-          {title}
-        </Typography>
-        <Typography className='infoBox__cases' color='textPrimary'>
-          24 hours: {cases}
-        </Typography>
-        <Typography className='infoBox__total' color='textPrimary'>
-          Total: {total}
-        </Typography>
+        <div className='infoBox__title'>{title}</div>
+        <div className='infoBox__label'>
+          <div>24 hours:</div>
+          <span>{cases && cases.toLocaleString()}</span>
+        </div>
+        <div className='infoBox__label'>
+          <div>Total:</div>
+          <span>{total && total.toLocaleString()}</span>
+        </div>
       </CardContent>
     </Card>
   )

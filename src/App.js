@@ -64,8 +64,12 @@ const App = () => {
       .then((data) => {
         setCountry(countryCode)
         setCountryInfo(data)
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long])
-        setMapZoom(4)
+        setMapCenter(
+          countryCode === 'worldwide'
+            ? [16.5388, 10.0418]
+            : [data.countryInfo.lat, data.countryInfo.long]
+        )
+        setMapZoom(countryCode === 'worldwide' ? 2 : 4)
       })
   }
 
@@ -73,7 +77,7 @@ const App = () => {
     <div className='app'>
       <div className='app__left'>
         <div className='app__header'>
-          <h1>COVID-19 Heatmap</h1>
+          <h1 className='app__title'>COVID-19 Heatmap</h1>
 
           <FormControl className='app__dropdown'>
             <Select
@@ -111,7 +115,7 @@ const App = () => {
       </div>
 
       <Card className='app__right'>
-        <CardContent>
+        <CardContent className='app__right-content'>
           <Table countries={tableData} />
           <LineGraph />
         </CardContent>

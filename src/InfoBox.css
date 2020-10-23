@@ -1,0 +1,17 @@
+.infoBox {
+  flex: 1;
+}
+
+.infoBox:not(:last-child) {
+  margin-right: 15px;
+}
+
+.infoBox__title {
+  font-weight: bold;
+}
+
+.infoBox__label {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+}

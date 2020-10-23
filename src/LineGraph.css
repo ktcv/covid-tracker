@@ -1,0 +1,13 @@
+.chart-title {
+  padding: 15px;
+}
+
+.chart-container {
+  height: 250px;
+}
+
+@media (max-width: 990px) {
+  .chart-container {
+    width: 100%;
+  }
+}
