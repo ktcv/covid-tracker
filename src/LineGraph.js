@@ -26,7 +26,7 @@ const LineGraph = ({ casesType, country, countryInfo }) => {
   useEffect(() => {
     const fetchData = () => {
       fetch(
-        `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=120`
+        `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=300`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -34,8 +34,12 @@ const LineGraph = ({ casesType, country, countryInfo }) => {
             const chartData = buildChartData(data, casesType)
             setData(chartData)
           } else {
-            const chartData = buildChartData(data.timeline, casesType)
-            setData(chartData)
+            if (!data.timeline) {
+              setData(null)
+            } else {
+              const chartData = buildChartData(data.timeline, casesType)
+              setData(chartData)
+            }
           }
         })
     }
@@ -50,13 +54,14 @@ const LineGraph = ({ casesType, country, countryInfo }) => {
         {casesType}
       </h3>
       <div className='chart-container'>
-        {data?.length > 0 && (
+        {data && data?.length > 0 && (
           <Line
             data={{
               datasets: [
                 {
                   backgroundColor: 'rgba(204, 16, 52, 0)',
-                  borderColor: '#CC1034',
+                  borderColor: '#cc1034',
+                  borderWidth: '2',
                   data: data,
                 },
               ],
@@ -64,6 +69,7 @@ const LineGraph = ({ casesType, country, countryInfo }) => {
             options={options}
           />
         )}
+        {!data && <p className='chart--noData'>No daily data available.</p>}
       </div>
     </div>
   )
