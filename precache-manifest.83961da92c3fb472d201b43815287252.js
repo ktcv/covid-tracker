@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "27d54ba85e3818abfdf5e78e00c61489",
+    "revision": "d2ebfcd3bf7c6d8f57b8edaf161b8ef5",
     "url": "/live-covid-heatmap/index.html"
   },
   {
