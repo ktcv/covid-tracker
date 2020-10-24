@@ -24,6 +24,7 @@ const App = () => {
   const [mapCenter, setMapCenter] = useState({ lat: 16.5388, lng: 10.0418 })
   const [mapZoom, setMapZoom] = useState(2)
   const [mapCountries, setMapCountries] = useState([])
+  const [casesType, setCasesType] = useState('cases')
 
   useEffect(() => {
     const getCountries = () => {
@@ -77,7 +78,7 @@ const App = () => {
     <div className='app'>
       <div className='app__left'>
         <div className='app__header'>
-          <h1 className='app__title'>COVID-19 Heatmap</h1>
+          <h1 className='app__title'>Live COVID-19 Heatmap</h1>
 
           <FormControl className='app__dropdown'>
             <Select
@@ -99,25 +100,42 @@ const App = () => {
             title='Cases'
             cases={countryInfo.todayCases}
             total={countryInfo.cases}
+            onClick={() => setCasesType('cases')}
+            active={casesType === 'cases'}
+            isRed
           />
           <InfoBox
             title='Recovered'
             cases={countryInfo.todayRecovered}
             total={countryInfo.recovered}
+            onClick={() => setCasesType('recovered')}
+            active={casesType === 'recovered'}
           />
           <InfoBox
             title='Deaths'
             cases={countryInfo.todayDeaths}
             total={countryInfo.deaths}
+            onClick={() => setCasesType('deaths')}
+            active={casesType === 'deaths'}
+            isRed
           />
         </div>
-        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
+        <Map
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+          casesType={casesType}
+        />
       </div>
 
       <Card className='app__right'>
         <CardContent className='app__right-content'>
           <Table countries={tableData} />
-          <LineGraph />
+          <LineGraph
+            casesType={casesType}
+            country={country}
+            countryInfo={countryInfo}
+          />
         </CardContent>
       </Card>
     </div>

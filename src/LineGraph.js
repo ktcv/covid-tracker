@@ -19,25 +19,36 @@ const buildChartData = (data, casesType = 'cases') => {
   return chartData
 }
 
-const LineGraph = ({ casesType }) => {
+const LineGraph = ({ casesType, country, countryInfo }) => {
   const [data, setData] = useState({})
+  const countryCode = country === 'worldwide' ? 'all' : country
 
   useEffect(() => {
     const fetchData = () => {
-      fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
+      fetch(
+        `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=120`
+      )
         .then((response) => response.json())
         .then((data) => {
-          let chartData = buildChartData(data, casesType)
-          setData(chartData)
+          if (country === 'worldwide') {
+            const chartData = buildChartData(data, casesType)
+            setData(chartData)
+          } else {
+            const chartData = buildChartData(data.timeline, casesType)
+            setData(chartData)
+          }
         })
     }
 
     fetchData()
-  }, [casesType])
+  }, [casesType, countryCode, country])
 
   return (
     <div>
-      <h3 className='chart-title'>Worldwide Daily Cases</h3>
+      <h3 className='chart-title'>
+        {country === 'worldwide' ? 'Worldwide' : countryInfo.country} Daily{' '}
+        {casesType}
+      </h3>
       <div className='chart-container'>
         {data?.length > 0 && (
           <Line

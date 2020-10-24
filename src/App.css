@@ -10,6 +10,10 @@ body {
   background-color: #f5f6fa;
 }
 
+.app__dropdown {
+  background-color: white;
+}
+
 .app {
   margin: auto;
   margin-top: 60px;

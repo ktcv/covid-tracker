@@ -1,5 +1,6 @@
 .chart-title {
   padding: 15px;
+  text-transform: capitalize;
 }
 
 .chart-container {
