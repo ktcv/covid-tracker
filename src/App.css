@@ -40,6 +40,31 @@ body {
   justify-content: space-between;
 }
 
+@media (max-width: 600px) {
+  .app__header {
+    flex-direction: column;
+    margin-bottom: 0px;
+  }
+
+  .app__title {
+    margin-bottom: 10px;
+    white-space: initial;
+  }
+
+  .app__dropdown {
+    width: 100%;
+  }
+
+  .app__left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app__stats {
+    order: 2;
+  }
+}
+
 .app__title {
   font-size: 32px;
   letter-spacing: 2px;
@@ -65,5 +90,12 @@ body {
   .app__right {
     margin-top: 16px;
     width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .app__stats {
+    display: flex;
+    flex-direction: column;
   }
 }

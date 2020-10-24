@@ -4,8 +4,16 @@
   cursor: pointer;
 }
 
-.infoBox:not(:last-child) {
-  margin-right: 15px;
+@media (min-width: 600px) {
+  .infoBox:not(:last-child) {
+    margin-right: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .infoBox {
+    margin-top: 16px;
+  }
 }
 
 .infoBox--active {

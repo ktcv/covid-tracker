@@ -121,6 +121,7 @@ const App = () => {
           />
         </div>
         <Map
+          className='map1'
           countries={mapCountries}
           center={mapCenter}
           zoom={mapZoom}
